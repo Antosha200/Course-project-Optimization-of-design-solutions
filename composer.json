@@ -1,0 +1,13 @@
+{
+  "name": "app/app",
+  "description": "app",
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "": [
+        "app/Model",
+        "app/Controller"
+      ]
+    }
+  }
+}
