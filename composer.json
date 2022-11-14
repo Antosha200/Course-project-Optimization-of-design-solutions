@@ -6,7 +6,9 @@
     "psr-4": {
       "": [
         "app/Model",
-        "app/Controller"
+        "app/Controller",
+        "app/Templates",
+        "app/Helpers"
       ]
     }
   }

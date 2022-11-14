@@ -2,6 +2,13 @@
 
 class FrontController
 {
+    public $priceBreakPoint; //точка разрыва цены q
+    public $demandIntensity; //интенсивность спроса D
+    public $costOfMakingOrder; //затраты на оформление заказа K
+    public $costOfStoringOrderUnit; //затраты на хранение единицы заказа hp
+    public $unitPrice; //цена единицы продукции c
+    public $orderCompletionPeriod; //срок выполнения заказа (дней) L
+
     public static function getInstance()
     {
         static $instance;
@@ -9,28 +16,35 @@ class FrontController
         return $instance;
     }
 
+    public function getData($priceBreakPoint, $demandIntensity, $costOfMakingOrder, $costOfStoringOrderUnit, $unitPrice, $orderCompletionPeriod)
+    {
+        $this->priceBreakPoint = $priceBreakPoint;
+        $this->demandIntensity = $demandIntensity;
+        $this->costOfMakingOrder = $costOfMakingOrder;
+        $this->costOfStoringOrderUnit = $costOfStoringOrderUnit;
+        $this->unitPrice = $unitPrice;
+        $this->orderCompletionPeriod = $orderCompletionPeriod;
+    }
+
+    /**
+     * @throws Exception
+     */
     public function makeRoute()
     {
-        //получить значения из формы
+        echo PHPTemplate::view("app/Templates/FormPage.php");
 
-        $priceBreakPoint = 100; //точка разрыва цены q
-        $demandIntensity = 1500; //интенсивность спроса D
-        $costOfMakingOrder = 50; //затраты на оформление заказа K
-        $costOfStoringOrderUnit = 0.02; //затраты на хранение единицы заказа h
-        $unitPrice = 1; //цена единицы продукции c
-        $orderCompletionPeriod = 5; //срок выполнения заказа (дней) L
+        if (!isset($this->priceBreakPoint)){
+            $this->priceBreakPoint = 100;
+        }
 
-        //посчитать
+        if (!isset($this->unitPrice)){
+            $this->unitPrice = 1;
+        }
 
-        $orderQuantity = Solver::findOptimalSize($priceBreakPoint, $demandIntensity, $costOfMakingOrder, $costOfStoringOrderUnit, $unitPrice);
-        var_dump($orderQuantity); //столько заказать
+        $orderQuantity = Solver::findOptimalSize($this->priceBreakPoint, $this->demandIntensity, $this->costOfMakingOrder, $this->costOfStoringOrderUnit, $this->unitPrice);
+        $orderRenewalPoint = Solver::findOrderRenewalPoint($orderQuantity, $this->orderCompletionPeriod, $this->demandIntensity);
 
-        $OrderRenewalPoint =  Solver::findOrderRenewalPoint($orderQuantity, $orderCompletionPeriod, $demandIntensity);
-        var_dump($OrderRenewalPoint); // как только их заказ уменьшится до $OrderRenewalPoint
-
-        // вывести в форму
-
-
+        echo PHPTemplate::view("app/Templates/AnswerPage.php", ['orderQuantity'=>$orderQuantity, 'orderRenewalPoint'=>$orderRenewalPoint]);
     }
 }
 
