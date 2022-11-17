@@ -4,16 +4,16 @@
     <link href="css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="result">
+<div align="center" class="result">
     <?php
-    echo "Оптимальная стратегия заказа: <br>";
+    echo "<b>" . "Оптимальная стратегия заказа: <br>";
 
     if (isset($orderQuantity)) {
-    echo "Заказать " . $orderQuantity . " единиц товара, как только его запас уменьшится до ";
+    echo "Заказать " . "<font color='#dc143c'>" . $orderQuantity . "</font>" . " единиц товара, как только его запас уменьшится до ";
     }
 
     if (isset($orderRenewalPoint)) {
-    echo $orderRenewalPoint . " штук";
+    echo "<font color='blue'>" . $orderRenewalPoint . "</font>" . " штук." . "</b>";
     }
     ?>
 </div>

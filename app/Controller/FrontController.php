@@ -33,18 +33,22 @@ class FrontController
     {
         echo PHPTemplate::view("app/Templates/FormPage.php");
 
-        if (!isset($this->priceBreakPoint)){
+        if (!isset($this->priceBreakPoint)) {
             $this->priceBreakPoint = 100;
         }
 
-        if (!isset($this->unitPrice)){
+        if (!isset($this->unitPrice)) {
             $this->unitPrice = 1;
         }
 
-        $orderQuantity = Solver::findOptimalSize($this->priceBreakPoint, $this->demandIntensity, $this->costOfMakingOrder, $this->costOfStoringOrderUnit, $this->unitPrice);
-        $orderRenewalPoint = Solver::findOrderRenewalPoint($orderQuantity, $this->orderCompletionPeriod, $this->demandIntensity);
+        if (isset($_POST['PriceBreakPoint'])) {
 
-        echo PHPTemplate::view("app/Templates/AnswerPage.php", ['orderQuantity'=>$orderQuantity, 'orderRenewalPoint'=>$orderRenewalPoint]);
+            $orderQuantity = Solver::findOptimalSize($this->priceBreakPoint, $this->demandIntensity, $this->costOfMakingOrder, $this->costOfStoringOrderUnit, $this->unitPrice);
+            $orderRenewalPoint = Solver::findOrderRenewalPoint($orderQuantity, $this->orderCompletionPeriod, $this->demandIntensity);
+
+            echo PHPTemplate::view("app/Templates/AnswerPage.php", ['orderQuantity' => $orderQuantity, 'orderRenewalPoint' => $orderRenewalPoint]);
+
+        }
     }
 }
 
