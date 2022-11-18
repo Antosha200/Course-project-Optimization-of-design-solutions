@@ -6,7 +6,7 @@
 <body>
 <div align="center" class="result">
     <?php
-    echo "<b>" . "Оптимальная стратегия заказа: <br>";
+    echo "<b>" . "<font color='black'>" . "Оптимальная стратегия заказа: <br>";
 
     if (isset($orderQuantity)) {
     echo "Заказать " . "<font color='#dc143c'>" . $orderQuantity . "</font>" . " единиц товара, как только его запас уменьшится до ";

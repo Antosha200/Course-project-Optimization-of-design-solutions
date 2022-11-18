@@ -1,0 +1,76 @@
+Зона 1:
+
+Price Break point (q) 
+100
+
+
+Demand intensity (D) 
+1500
+
+
+The cost of making an order (K) 
+50
+
+
+The cost of storing an order unit (h) 
+0.02
+
+
+Unit price (c) 
+1
+
+
+Order completion period (L) 
+5
+
+Зона 3:
+
+Price Break point (q) 
+1000
+
+
+Demand intensity (D) 
+120
+
+
+The cost of making an order (K) 
+50
+
+
+The cost of storing an order unit (h) 
+0.02
+
+
+Unit price (c) 
+1
+
+
+Order completion period (L) 
+2
+
+Зона 2:
+
+Price Break point (q) 
+12000
+
+
+Demand intensity (D) 
+12
+
+
+The cost of making an order (K) 
+50
+
+
+The cost of storing an order unit (h) 
+2546
+
+
+Unit price (c) 
+6789
+
+
+Order completion period (L) 
+5
+
+
