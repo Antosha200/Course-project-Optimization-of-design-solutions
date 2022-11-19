@@ -7,7 +7,7 @@
       "": [
         "app/Model",
         "app/Controller",
-        "app/Templates",
+        "app/View",
         "app/Helpers"
       ]
     }

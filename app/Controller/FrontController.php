@@ -5,7 +5,7 @@ class FrontController
     public $priceBreakPoint; //точка разрыва цены q
     public $demandIntensity; //интенсивность спроса D
     public $costOfMakingOrder; //затраты на оформление заказа K
-    public $costOfStoringOrderUnit; //затраты на хранение единицы заказа hp
+    public $costOfStoringOrderUnit; //затраты на хранение единицы заказа h
     public $unitPrice; //цена единицы продукции c
     public $orderCompletionPeriod; //срок выполнения заказа (дней) L
 
@@ -31,7 +31,7 @@ class FrontController
      */
     public function makeRoute()
     {
-        echo PHPTemplate::view("app/Templates/FormPage.php");
+        echo PHPTemplate::view("app/View/FormPage.php");
 
         if (!isset($this->priceBreakPoint)) {
             $this->priceBreakPoint = 100;
@@ -46,7 +46,7 @@ class FrontController
             $orderQuantity = Solver::findOptimalSize($this->priceBreakPoint, $this->demandIntensity, $this->costOfMakingOrder, $this->costOfStoringOrderUnit, $this->unitPrice);
             $orderRenewalPoint = Solver::findOrderRenewalPoint($orderQuantity, $this->orderCompletionPeriod, $this->demandIntensity);
 
-            echo PHPTemplate::view("app/Templates/AnswerPage.php", ['orderQuantity' => $orderQuantity, 'orderRenewalPoint' => $orderRenewalPoint]);
+            echo PHPTemplate::view("app/View/AnswerPage.php", ['orderQuantity' => $orderQuantity, 'orderRenewalPoint' => $orderRenewalPoint]);
 
         }
     }
