@@ -11,6 +11,9 @@ class Solver
 
         if ($q < $ym) {
             self::defineZone(1);
+            $DC1 = $D * $c;
+            $Q = $DC1 + ($K * $D / $ym) + (($h / 2) * $ym);
+            self::getVarOfZone($q, $ym, $Q, $ym);
             return round($ym);
         } else {
             $DC1 = $D * $c;
@@ -18,9 +21,11 @@ class Solver
 
             if ($q <= $Q) {
                 self::defineZone(2);
+                self::getVarOfZone($q, $q, $Q, $ym);
                 return round($q);
             } else {
                 self::defineZone(3);
+                self::getVarOfZone($q, $ym, $Q, $ym);
                 return round($ym);
             }
         }
@@ -46,21 +51,27 @@ class Solver
     {
         switch ($zoneNumber) {
             case 1:
-                echo "<br>" . "<div align='center' xmlns=\"http://www.w3.org/1999/html\">" . "Определена зона " . "<font color='#8a2be2'>" . "<b>" . "1". "</font>" . "</div>";
+                echo "<br>" . "<div align='center' xmlns=\"http://www.w3.org/1999/html\">" . "Определена зона " . "<font color='#8a2be2'>" . "<b>" . "1" . "</font>" . "</div>";
                 echo "<div align='center'>" . "<img src='/img/zone_1.png'>" . "</div>";
                 break;
             case 2:
-                echo "<br>" . "<div align='center' xmlns=\"http://www.w3.org/1999/html\">" . "Определена зона " . "<font color='#a52a2a'>" . "<b>" . "2". "</>" . "</div>";
+                echo "<br>" . "<div align='center' xmlns=\"http://www.w3.org/1999/html\">" . "Определена зона " . "<font color='#a52a2a'>" . "<b>" . "2" . "</>" . "</div>";
                 echo "<div align='center'>" . "<img src='/img/zone_2.png'>" . "</div>";
                 break;
             case 3:
-                echo "<br>" . "<div align='center' xmlns=\"http://www.w3.org/1999/html\">" . "Определена зона " . "<font color='#6495ed'>" . "<b>" . "3". "</>" . "</div>";
+                echo "<br>" . "<div align='center' xmlns=\"http://www.w3.org/1999/html\">" . "Определена зона " . "<font color='#6495ed'>" . "<b>" . "3" . "</>" . "</div>";
                 echo "<div align='center'>" . "<img src='/img/zone_3.png'>" . "</div>";
                 break;
             default:
-                echo "<br>" . "<div align='center' xmlns=\"http://www.w3.org/1999/html\">" . "Не удалось определить зону" . "<br>" . "Убедитесь, что введены все необходимые данные". "</div>";
+                echo "<br>" . "<div align='center' xmlns=\"http://www.w3.org/1999/html\">" . "Не удалось определить зону" . "<br>" . "Убедитесь, что введены все необходимые данные" . "</div>";
         }
     }
 
-
+    public static function getVarOfZone($q, $y, $Q, $ym)
+    {
+        echo "<div align='center'>" . "<font color='black'>" . "q = " . $q . "<br>";
+        echo "Q = " . $Q . "<br>";
+        echo "Ym = " . $ym . "<br>";
+        echo "y' = " . $y . "<br>" . "</div>";
+    }
 }
